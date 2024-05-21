@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Area Calculator</title>
+</head>
+<body>
+    <h1>Circle Area Calculator</h1>
+    <form action="{{ url_for('calculate') }}" method="post">
+        <label for="radius">Radius of the circle:</label>
+        <input type="number" id="radius" name="radius" step="any" required>
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+    {% if success %}
+        <p>The area of the circle with radius {{ radius }} is {{ result }} square units.</p>
+        <form action="{{ url_for('index') }}" method="get">
+            <button type="submit" class="calculate-another">Calculate another</button>
+        </form>
+    {% else %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% endif %}
+
+    <h2>Past Calculations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Radius</th>
+                <th>Area</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for calculation in results %}
+                <tr>
+                    <td>{{ calculation['radius'] }}</td>
+                    <td>{{ calculation['area'] }}</td>
+                    <td>{{ calculation['timestamp'] }}</td>
+                    <td>
+                        <form action="{{ url_for('delete', calculation_id=calculation['id']) }}" method="post">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this calculation?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
