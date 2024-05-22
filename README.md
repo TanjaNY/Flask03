@@ -27,70 +27,77 @@ Vorbereitungen:
 
 Stellen Sie sicher, dass Sie die sqlite3-Bibliothek installiert haben:
 
-Bash
+```bash
 pip install sqlite3
-
+```
 
 Aktualisieren der Datei app.py:
 
 Die Datei app.py enthält den Hauptcode unserer Anwendung. Wir aktualisieren sie nun für die SQLite-Integration.
 
-Änderungen in app.py:
+### Änderungen in app.py:
 
 Importieren der Bibliothek:
 
 Python
-import sqlite3
 
+```bash
+import sqlite3
+```
 Verbinden zur Datenbank:
 
 Python
+```bash
 conn = sqlite3.connect('flask_app.db')
 c = conn.cursor()
-
+```
 Tabelle calculations erstellen:
 
 Python
+```bash
 c.execute('''CREATE TABLE IF NOT EXISTS calculations (
                 radius REAL,
                 area REAL
             )''')
-
+```
 Speichern von Berechnungsergebnissen:
 
 Python
+```bash
 def save_calculation(radius, area):
     c.execute('INSERT INTO calculations (radius, area) VALUES (?, ?)', (radius, area))
     conn.commit()
-
+```
 Abrufen gespeicherter Ergebnisse:
 
 Python
+```bash
 def get_calculations():
     c.execute('SELECT * FROM calculations')
     return c.fetchall()
-
+```
 
 Löschen von Berechnungseinträgen:
 
 Python
+```bash
 def delete_calculation(calculation_id):
     c.execute('DELETE FROM calculations WHERE id = ?', (calculation_id,))
     conn.commit()
+```
+### Anpassen der Routen:
 
-Anpassen der Routen:
-
-Aktualisieren Sie die Routen / und /calculate für die neuen Funktionen.
-
+Aktualisieren Sie die Routen "/" und "/calculate" für die neuen Funktionen.
 Aktualisieren der Datei templates/index.html:
 
 Die Datei index.html enthält die HTML-Vorlage. Wir aktualisieren sie, um die gespeicherten Ergebnisse anzuzeigen und das Löschen einzelner Einträge zu ermöglichen.
 
-Änderungen in index.html:
+### Änderungen in index.html:
 
 Abschnitt zum Anzeigen gespeicherter Berechnungen:
 
 HTML
+```bash
 {% if calculations %}
     <h2>Gespeicherte Berechnungen</h2>
     <table class="table">
@@ -114,6 +121,7 @@ HTML
         </tbody>
     </table>
 {% endif %}
+```
 
 
 ## 2. app.py erwetern
