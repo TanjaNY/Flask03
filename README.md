@@ -87,8 +87,7 @@ def delete_calculation(calculation_id):
 ```
 ### Anpassen der Routen:
 
-Aktualisieren Sie die Routen "/" und "/calculate" für die neuen Funktionen.
-Aktualisieren der Datei templates/index.html:
+Wir aktualisieren  die Routen "/" und "/calculate" für die neuen Funktionen.
 
 Die Datei index.html enthält die HTML-Vorlage. Wir aktualisieren sie, um die gespeicherten Ergebnisse anzuzeigen und das Löschen einzelner Einträge zu ermöglichen.
 
