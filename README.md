@@ -25,19 +25,19 @@ In unserer Anwendung haben wir uns für die Verwendung von SQLite entschieden un
 ## 2. Integration von SQLite
 Vorbereitungen:
 
-Stellen Sie sicher, dass Sie die sqlite3-Bibliothek installiert haben:
+Wir stellen sicher , dass Sie die sqlite3-Bibliothek installiert haben:
 
 ```bash
 pip install sqlite3
 ```
 
-Aktualisieren der Datei app.py:
+### Aktualisieren der Datei app.py:
 
 Die Datei app.py enthält den Hauptcode unserer Anwendung. Wir aktualisieren sie nun für die SQLite-Integration.
 
-### Änderungen in app.py:
 
-Importieren der Bibliothek:
+
+Wir importieren die SQLite-Bibliothek:
 
 Python
 
@@ -51,7 +51,7 @@ Python
 conn = sqlite3.connect('flask_app.db')
 c = conn.cursor()
 ```
-Tabelle calculations erstellen:
+Erstellen Tabellenkalkulationen:
 
 Python
 ```bash
