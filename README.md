@@ -133,21 +133,20 @@ Einfache Flask-Anwendung mit zwei Routen:
 /: Rendert die Index-Seite
 /calculate: Verarbeitet eine POST-Anfrage mit dem Radius, berechnet das Ergebnis und rendert es auf der Index-Seite
 Speichert keine Daten in einer Datenbank
+<p>&nbsp;</p>
 Version 2:
-
+<p>&nbsp;</p>
 Integriert eine SQLite-Datenbank zur Datenspeicherung:
 Bietet Funktionen zur Verbindungsherstellung mit der Datenbank und der Tabelle calculations
+<p>&nbsp;</p>
 Neue Routen:
-/: Rendert die Index-Seite mit allen gespeicherten Berechnungsergebnissen aus der Datenbank
-
-/calculate: Verarbeitet eine POST-Anfrage, speichert das Ergebnis in der Datenbank und rendert es auf der Index-Seite
-
-/delete/<int:calculation_id>: Löscht einen bestimmten Eintrag aus der Datenbank
-
-Verbesserte Datenverwaltung:
-Speichert, löscht und ruft Berechnungsergebnisse mithilfe der Datenbank
-Erweiterte Funktionalität: Ermöglicht komplexere Anwendungsfälle
-Fazit:
+<p>&nbsp;</p>
+"/: " Rendert die Index-Seite mit allen gespeicherten Berechnungsergebnissen aus der Datenbank
+<p>&nbsp;</p>
+"/calculate " :  Verarbeitet eine POST-Anfrage, speichert das Ergebnis in der Datenbank und rendert es auf der Index-Seite.
+<p>&nbsp;</p>
+"/delete/<int:calculation_id> ":  Löscht einen bestimmten Eintrag aus der Datenbank.
+<p>&nbsp;</p>
 
 Die zweite Version bietet durch die Integration einer SQLite-Datenbank eine deutlich verbesserte Datenverwaltung. Dies ermöglicht die Speicherung, Abfrage und Löschung von Berechnungsergebnissen, was die Funktionalität der Anwendung erweitert und sie für komplexere Anwendungsfälle besser geeignet macht.
 
