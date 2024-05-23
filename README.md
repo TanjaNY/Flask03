@@ -127,14 +127,15 @@ HTML
 
 Öffnen wir die beiden Dateien app.py (Flask01) und app.py (Flask02) und vergleichen  sie. Die Hauptunterschiede zwischen den beiden Versionen der Flask-Anwendung liegen in der Integration einer SQLite-Datenbank in die Version 2.
 
-Version 1:
+### Version 1:
 
 Einfache Flask-Anwendung mit zwei Routen:
 /: Rendert die Index-Seite
 /calculate: Verarbeitet eine POST-Anfrage mit dem Radius, berechnet das Ergebnis und rendert es auf der Index-Seite
 Speichert keine Daten in einer Datenbank
 <p>&nbsp;</p>
-Version 2:
+
+### Version 2:
 <p>&nbsp;</p>
 Integriert eine SQLite-Datenbank zur Datenspeicherung:
 Bietet Funktionen zur Verbindungsherstellung mit der Datenbank und der Tabelle calculations
