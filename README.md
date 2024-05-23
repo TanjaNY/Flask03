@@ -31,11 +31,11 @@ Wir stellen sicher , dass Sie die sqlite3-Bibliothek installiert haben:
 pip install sqlite3
 ```
 
-### Aktualisieren der Datei app.py:
+### 3.Aktualisierung der app.py:
 
 Die Datei app.py enthält den Hauptcode unserer Anwendung. Wir aktualisieren sie nun für die SQLite-Integration.
 
-### Und so können wir 
+### Und so können wir.. 
 
 die DSQLite-Bibliothek importieren:
 
@@ -122,33 +122,36 @@ HTML
 ```
 
 
-## 2. app.py erwetern
-Am besten öffnen wir beide Dateien app.py (Flask01) und app.py(Flask02) und vergleichen die beide.
-Die zwei Versionen der Flask-Anwendung unterscheiden sich im Wesentlichen durch die Integration einer SQLite-Datenbank in der zweiten Version. Hier sind die wichtigsten Unterschiede:
-## Erste Version
-### Einfache Flask-Anwendung mit zwei Routen:
+## 4.Vergleich von Code-Versionen: app.py (Flask01) vs. app.py (Flask02)
 
-'/' zum Rendern der Index-Seite
 
-'/calculate' zur Verarbeitung einer POST-Anfrage mit dem Radius und dem Rendern der Ergebnisse auf der Index-Seite.
+Öffnen wir die beiden Dateien app.py (Flask01) und app.py (Flask02) und vergleichen  sie. Die Hauptunterschiede zwischen den beiden Versionen der Flask-Anwendung liegen in der Integration einer SQLite-Datenbank in die Version 2.
 
-Kein Speichern von Daten in einer Datenbank.
+Version 1:
 
-## Zweite Version
-### Integration einer SQLite-Datenbank zum Speichern von Daten.
+Einfache Flask-Anwendung mit zwei Routen:
+/: Rendert die Index-Seite
+/calculate: Verarbeitet eine POST-Anfrage mit dem Radius, berechnet das Ergebnis und rendert es auf der Index-Seite
+Speichert keine Daten in einer Datenbank
+Version 2:
 
-Mehrere Funktionen zur Verbindungsherstellung mit der Datenbank und Tabelle calculations.
-Mehrere neue Routen:
+Integriert eine SQLite-Datenbank zur Datenspeicherung:
+Bietet Funktionen zur Verbindungsherstellung mit der Datenbank und der Tabelle calculations
+Neue Routen:
+/: Rendert die Index-Seite mit allen gespeicherten Berechnungsergebnissen aus der Datenbank
 
-'/' zum Rendern der Index-Seite mit allen gespeicherten Berechnungsergebnissen aus der Datenbank.
-        
-'/calculate' zur Verarbeitung einer POST-Anfrage, Speichern des Berechnungsergebnisses in der Datenbank und Rendern der Ergebnisse auf der Index-Seite.
+/calculate: Verarbeitet eine POST-Anfrage, speichert das Ergebnis in der Datenbank und rendert es auf der Index-Seite
 
-'/ delete/<int:calculation_id>' zum Löschen eines bestimmten Eintrags aus der Datenbank.
+/delete/<int:calculation_id>: Löscht einen bestimmten Eintrag aus der Datenbank
 
-Im Allgemeinen bietet die zweite Version eine bessere Datenverwaltung durch die Integration einer SQLite-Datenbank. Diese ermöglicht das Speichern, Abfragen und Löschen von Berechnungsergebnissen, was die Funktionalität der Anwendung erweitert und sie für komplexere Anwendungsfälle geeignet macht.
+Verbesserte Datenverwaltung:
+Speichert, löscht und ruft Berechnungsergebnisse mithilfe der Datenbank
+Erweiterte Funktionalität: Ermöglicht komplexere Anwendungsfälle
+Fazit:
 
-## 3. Die Anwendung starten.
+Die zweite Version bietet durch die Integration einer SQLite-Datenbank eine deutlich verbesserte Datenverwaltung. Dies ermöglicht die Speicherung, Abfrage und Löschung von Berechnungsergebnissen, was die Funktionalität der Anwendung erweitert und sie für komplexere Anwendungsfälle besser geeignet macht.
+
+## 5. Die Anwendung starten.
 
 - Navigiere zum Verzeichnis der geklonten Flask-Anwendung.
 - Aktiviere die Conda-Umgebung mit dem Befehl:
