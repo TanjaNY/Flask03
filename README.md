@@ -90,7 +90,7 @@ Die Datei index.html enthält die HTML-Vorlage. Wir aktualisieren sie, um die ge
 
 ### Änderungen in index.html:
 
-Im Abschnitt fürs Anzeigen gespeicherter Berechnungen werden HTML, Jinja2-Template-Syntax und Bootstrap-CSS-Klassen verwendet. Die HTML-Struktur wird verwendet, um eine Tabelle mit den Spalten "Radius", "Fläche" und "Aktion" zu definieren. Die Bootstrap-Klasse table wird verwendet, um die Tabelle stilvoll und für mobile Geräte ansprechend zu gestalten.
+Im Abschnitt für gespeicherte Berechnungen werden HTML, Jinja2-Template-Syntax und Bootstrap-CSS-Klassen angesetzt. Die HTML-Struktur wird verwendet, um eine Tabelle mit den Spalten "Radius", "Fläche" und "Aktion" zu definieren. Die Bootstrap-Klasse table wird verwendet, um die Tabelle stilvoll und für mobile Geräte ansprechend zu gestalten.
 Jinja2-Syntax wird verwendet, um die Daten aus der Datenbank zu rendern und dynamische Inhalte innerhalb der HTML-Seite zu erstellen. Das {% for %}-Schleifenelement iteriert über alle berechneten Werte in der Variablen calculations und fügt eine neue Zeile für jeden berechneten Radius und die zugehörige Fläche hinzu. Zudem gibt es einen Link zum Löschen der berechneten Werte aus der Datenbank.
 Die Kombination von HTML, CSS, JavaScript und Template-Engines wie Jinja2 ermöglicht es, komplexe und benutzerfreundliche Webapplikationen zu erstellen, indem sie Präsentation, Interaktion und Inhaltsgenerierung effizient und effektiv kombinieren.
 
