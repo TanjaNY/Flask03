@@ -46,14 +46,12 @@ import sqlite3
 ```
 Verbinden zur Datenbank:
 
-Python
 ```bash
 conn = sqlite3.connect('flask_app.db')
 c = conn.cursor()
 ```
 Erstellen Tabellenkalkulationen:
 
-Python
 ```bash
 c.execute('''CREATE TABLE IF NOT EXISTS calculations (
                 radius REAL,
@@ -62,7 +60,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS calculations (
 ```
 Speichern von Berechnungsergebnissen:
 
-Python
+
 ```bash
 def save_calculation(radius, area):
     c.execute('INSERT INTO calculations (radius, area) VALUES (?, ?)', (radius, area))
@@ -70,7 +68,7 @@ def save_calculation(radius, area):
 ```
 Abrufen gespeicherter Ergebnisse:
 
-Python
+
 ```bash
 def get_calculations():
     c.execute('SELECT * FROM calculations')
@@ -79,7 +77,7 @@ def get_calculations():
 
 Löschen von Berechnungseinträgen:
 
-Python
+
 ```bash
 def delete_calculation(calculation_id):
     c.execute('DELETE FROM calculations WHERE id = ?', (calculation_id,))
