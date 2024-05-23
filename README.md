@@ -35,22 +35,22 @@ pip install sqlite3
 
 Die Datei app.py enthält den Hauptcode unserer Anwendung. Wir aktualisieren sie nun für die SQLite-Integration.
 
+###So können wir 
 
-
-Wir importieren die SQLite-Bibliothek:
+die DSQLite-Bibliothek importieren:
 
 Python
 
 ```bash
 import sqlite3
 ```
-Verbinden zur Datenbank:
+Eine Datenbank-Verbindung herstellen:
 
 ```bash
 conn = sqlite3.connect('flask_app.db')
 c = conn.cursor()
 ```
-Erstellen Tabellenkalkulationen:
+Tabellenkalkulationen erstellen:
 
 ```bash
 c.execute('''CREATE TABLE IF NOT EXISTS calculations (
@@ -58,7 +58,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS calculations (
                 area REAL
             )''')
 ```
-Speichern von Berechnungsergebnissen:
+Berechnungsergebnissen speichern:
 
 
 ```bash
@@ -66,7 +66,7 @@ def save_calculation(radius, area):
     c.execute('INSERT INTO calculations (radius, area) VALUES (?, ?)', (radius, area))
     conn.commit()
 ```
-Abrufen gespeicherter Ergebnisse:
+ gespeicherte Ergebnisse abrufen:
 
 
 ```bash
@@ -75,7 +75,7 @@ def get_calculations():
     return c.fetchall()
 ```
 
-Löschen von Berechnungseinträgen:
+Einträge löschen:
 
 
 ```bash
