@@ -3,7 +3,8 @@
 
 # Flask02
 Das ist die zweite Flask-Lektion, die erste Lektion findest du hier:https://github.com/TanjaNY/Flask
-Klone das Repository:
+
+Klone das Repository für die 2te Lektion:
 ```bash
 git clone https://github.com/TanjaNY/Flask02.git
 ```
