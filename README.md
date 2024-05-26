@@ -3,6 +3,11 @@
 
 # Flask02
 Das ist die zweite Flask-Lektion, die erste Lektion findest du hier:https://github.com/TanjaNY/Flask
+Klone das Repository:
+```bash
+git clone https://github.com/TanjaNY/Flask02.git
+```
+
 
 
 ## 1. Hinzufügen einer Datenbank zur Anwendung
