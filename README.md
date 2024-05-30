@@ -160,7 +160,7 @@ Die zweite Version bietet durch die Integration einer SQLite-Datenbank eine deut
 ## 5. Die Anwendung starten.
 
 - Navigiere zum Verzeichnis der geklonten Flask-Anwendung.
-- Aktiviere die Conda-Umgebung mit dem Befehl:
+- Aktiviere die Umgebung mit dem Befehl:
 
 ```bash
 flask_env\Scripts\activate
