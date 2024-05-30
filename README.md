@@ -8,8 +8,58 @@ Klone das Repository für die 2te Lektion:
 ```bash
 git clone https://github.com/TanjaNY/Flask02.git
 ```
+## Wenn Du Flask01 nicht mitgemacht hast..
+### a. GitHub-Repository klonen:
+
+- Öffne die Kommandozeile (cmd) auf deinem Windows-Computer.
+- Navigiere zu dem Verzeichnis, in das du die Anwendung klonen möchtest.
+- Verwende den folgenden Befehl, um das Repository von GitHub zu klonen:
+
+```bash
+git clone [https://github.com/TanjaNY/Flask.git](https://github.com/TanjaNY/Flask02.git)
+```
+
+### b. Flask-Umgebung erstellen:
+
+- Öffne die Conda-Befehlszeile.
+- Füge dein Anaconda-Verzeichnis zu den Umgebungsvariablen hinzu [Anleitung](https://michster.de/wie-setze-ich-die-path-umgebungsvariablen-unter-windows-10/).
+- Verwende den folgenden Befehl, um eine neue Conda-Umgebung zu erstellen:
+
+```bash
+conda create --name flask_env 
+```
+
+- Aktiviere die erstellte Umgebung mit dem Befehl:
+
+```bash
+conda activate flask_env
+```
+- Anaconda ist nicht zwingend erforderlich, um eine Flask-App zu entwickeln. Du benötigst Anaconda, wenn du Data Science meistern möchtest. Im Fall, dass du dich gegen Anaconda entscheidest, werden die Befehle etwas anders aussehen.
 
 
+```bash
+python -m venv flask_env 
+```
+
+
+```bash
+flask_env\Scripts\activate
+```
+
+## c. Flask und Werkzeug installieren:
+
+Flask und Werkzeug sind zwei Python-Pakete, die für die Webentwicklung verwendet werden.
+Flask ist ein leichtgewichtiges Webframework für Python, das die Entwicklung von Webanwendungen und APIs erleichtert. Es bietet eine einfache und intuitive API, die Entwicklern ermöglicht, einfache, aber leistungsfähige Web-Apps schnell und effizient zu entwickeln.
+Werkzeug ist eine Python-Bibliothek, die eine Sammlung von Werkzeugen und Bibliotheken für die Entwicklung von Webanwendungen bereitstellt. Es bietet Funktionen wie HTTP-Verwaltung, Anwendungsobjekte und Debugging-Funktionen, die in Flask und anderen Python-Webframeworks verwendet werden können.
+Werkzeug stellt somit eine wichtige Infrastruktur für die Entwicklung von Web-Apps und APIs mit Python dar.
+
+
+- In der aktivierten Conda-Umgebung führe die folgenden Befehle aus, um Flask und Werkzeug zu installieren:
+
+```bash
+pip install flask 
+pip install Werkzeug 
+```
 
 ## 1. Hinzufügen einer Datenbank zur Anwendung
 Wir haben eine Web-Anwendung erstellt. Jetzt möchten wir alle Ergebnisse speichern. Dafür benötigen wir eine Datenbank. Wir werden SQLite verwenden.
@@ -160,6 +210,7 @@ Die zweite Version bietet durch die Integration einer SQLite-Datenbank eine deut
 ## 5. Die Anwendung starten.
 
 - Navigiere zum Verzeichnis der geklonten Flask-Anwendung.
+- Wenn du Flask01 nicht mitgemacht hast, lese Flask01/3. Flask-Umgebung erstellen.
 - Aktiviere die Umgebung mit dem Befehl:
 
 ```bash
