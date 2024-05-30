@@ -4,10 +4,7 @@
 # Flask02
 Das ist die zweite Flask-Lektion, die erste Lektion findest du hier:https://github.com/TanjaNY/Flask
 
-Klone das Repository für die 2te Lektion:
-```bash
-git clone https://github.com/TanjaNY/Flask02.git
-```
+
 ## Wenn Du Flask01 nicht mitgemacht hast..
 ### a. GitHub-Repository klonen:
 
@@ -16,7 +13,7 @@ git clone https://github.com/TanjaNY/Flask02.git
 - Verwende den folgenden Befehl, um das Repository von GitHub zu klonen:
 
 ```bash
-git clone [https://github.com/TanjaNY/Flask.git](https://github.com/TanjaNY/Flask02.git)
+git git clone https://github.com/TanjaNY/Flask02.git
 ```
 
 ### b. Flask-Umgebung erstellen:
