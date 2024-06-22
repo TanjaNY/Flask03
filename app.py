@@ -2,8 +2,33 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import datetime
 import os
+import logging
+from logging.handlers import RotatingFileHandler
+from logging.config import fileConfig
+
 
 app = Flask(__name__)
+# Create a file handler
+file_handler = RotatingFileHandler('flask.log', maxBytes=1024 * 1024 * 10, backupCount=10)
+
+# Create a logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Create a formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# Add the formatter to the file handler
+file_handler.setFormatter(formatter)
+
+# Add the file handler to the logger
+logger.addHandler(file_handler)
+
+# Configure logging
+fileConfig('logging.conf')
+logger = logging.getLogger()
+
+
 
 # Konfiguration der Datenbankverbindung
 BASE_DIR = os.getcwd()
