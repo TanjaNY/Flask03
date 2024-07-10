@@ -1,10 +1,5 @@
-# Unterschiede zwischen den beiden Code-Versionen
+# Von Entwicklung zu Produktion
 
-## Einleitung
-
-Dieser Abschnitt beschreibt die Unterschiede zwischen der ursprünglichen und der zweiten Version des Flask-Codes. Die Änderungen zielen darauf ab, die Anwendung robuster und besser für den Einsatz in Produktionsumgebungen vorzubereiten.
-
-## Unterschiede im Detail
 
 ### 1. Logging-Einrichtung
 
