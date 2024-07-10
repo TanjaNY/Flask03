@@ -1,7 +1,7 @@
 # Von Entwicklung zu Produktion
 
 
-### 1. Logging-Einrichtung
+### 1. Code Refactoring
 
 **Änderung:**
 In der zweiten Version wurde eine umfassende Logging-Einrichtung mit dem `logging`-Modul hinzugefügt, die sowohl File- als auch Console-Handler umfasst. Logs werden in `/tmp/flask.log` gespeichert.
