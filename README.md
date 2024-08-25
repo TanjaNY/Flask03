@@ -3,6 +3,19 @@
 
 ### 1. Code Refactoring
 
+**Warum brauchen wir Code Refactoring?**
+Code-Refactoring ist aus mehreren Gründen wichtig:
+
+-Verbesserte Lesbarkeit: Macht den Code verständlicher für Entwickler.
+-Erhöhte Wartbarkeit: Erleichtert zukünftige Änderungen und Fehlerbehebungen.
+-Effizienzsteigerung: Optimiert die Leistung und reduziert Redundanzen.
+-Bessere Skalierbarkeit: Ermöglicht einfachere Erweiterungen.
+-Reduzierte technische Schulden: Verhindert Anhäufung von Problemen.
+-Verbesserte Testbarkeit: Erleichtert das Schreiben und Ausführen von Tests.
+-Anpassung an neue Standards: Hält den Code auf dem neuesten Stand.
+-Beseitigung von "Code-Geruch": Entfernt schlechte Praktiken und Muster.
+-Förderung der Wiederverwendbarkeit: Ermöglicht die Nutzung von Code in anderen Projekten.
+
 **Änderung:**
 In der zweiten Version wurde eine umfassende Logging-Einrichtung mit dem `logging`-Modul hinzugefügt, die sowohl File- als auch Console-Handler umfasst. Logs werden in `/tmp/flask.log` gespeichert.
 
@@ -32,6 +45,9 @@ logger.addHandler(console_handler)
 ```
 
 ### 2. AWS Lambda-Unterstützung
+
+**Deployment-Reafactoring**
+
 
 **Änderung:**
 Die zweite Version enthält die `awsgi`-Bibliothek und eine auskommentierte Lambda-Handler-Funktion.
