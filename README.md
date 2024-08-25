@@ -6,11 +6,11 @@
 **Warum brauchen wir Code Refactoring?**
 Code-Refactoring ist aus mehreren Gründen wichtig:
 
--Verbesserte Lesbarkeit: Macht den Code verständlicher für Entwickler.
--Erhöhte Wartbarkeit: Erleichtert zukünftige Änderungen und Fehlerbehebungen.
--Effizienzsteigerung: Optimiert die Leistung und reduziert Redundanzen.
--Bessere Skalierbarkeit: Ermöglicht einfachere Erweiterungen.
--Reduzierte technische Schulden: Verhindert Anhäufung von Problemen.
+1.Verbesserte Lesbarkeit: Macht den Code verständlicher für Entwickler.
+2.Erhöhte Wartbarkeit: Erleichtert zukünftige Änderungen und Fehlerbehebungen.
+3.Effizienzsteigerung: Optimiert die Leistung und reduziert Redundanzen.
+4.Bessere Skalierbarkeit: Ermöglicht einfachere Erweiterungen.
+5.Reduzierte technische Schulden: Verhindert Anhäufung von Problemen.
 -Verbesserte Testbarkeit: Erleichtert das Schreiben und Ausführen von Tests.
 -Anpassung an neue Standards: Hält den Code auf dem neuesten Stand.
 -Beseitigung von "Code-Geruch": Entfernt schlechte Praktiken und Muster.
