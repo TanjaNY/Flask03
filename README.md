@@ -16,10 +16,15 @@ Code-Refactoring ist aus mehreren Gründen wichtig:
 
 5. Reduzierte technische Schulden: Verhindert Anhäufung von Problemen.
 
--Verbesserte Testbarkeit: Erleichtert das Schreiben und Ausführen von Tests.
--Anpassung an neue Standards: Hält den Code auf dem neuesten Stand.
--Beseitigung von "Code-Geruch": Entfernt schlechte Praktiken und Muster.
--Förderung der Wiederverwendbarkeit: Ermöglicht die Nutzung von Code in anderen Projekten.
+6.Verbesserte Testbarkeit: Erleichtert das Schreiben und Ausführen von Tests.
+
+7.Anpassung an neue Standards: Hält den Code auf dem neuesten Stand.
+
+8.Beseitigung von "Code-Geruch": Entfernt schlechte Praktiken und Muster.
+
+9.Förderung der Wiederverwendbarkeit: Ermöglicht die Nutzung von Code in anderen Projekten.
+
+Code-Refactoring vor der Produktions-Deployment ist wichtig, um sicherzustellen, dass der Code robust und fehlerfrei ist. Es hilft, potenzielle Performance-Probleme und Sicherheitslücken zu identifizieren und zu beheben, bevor sie in einer Live-Umgebung Schaden anrichten können. Durch Refactoring wird der Code sauberer und einfacher zu verstehen, was die Wartung und das Debugging nach der Bereitstellung erleichtert. Zudem stellt es sicher, dass der Code effizient und skalierbar ist, was in einer Produktionsumgebung von entscheidender Bedeutung ist.
 
 **Änderung:**
 In der zweiten Version wurde eine umfassende Logging-Einrichtung mit dem `logging`-Modul hinzugefügt, die sowohl File- als auch Console-Handler umfasst. Logs werden in `/tmp/flask.log` gespeichert.
