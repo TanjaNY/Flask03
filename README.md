@@ -90,12 +90,15 @@ def init_db():
 - **Änderung**: Die Berechnung der Kreisfläche verwendet nun die Konstante `pi` aus dem `math`-Modul.
 - **Erklärung**: `math.pi` ist eine genauere und standardisierte Methode zur Berechnung des Pi-Wertes, was zu präziseren Berechnungen führt. Die Auslagerung der Berechnung in die Funktion `calculate_area()` erhöht die Modularität und Wiederverwendbarkeit des Codes.
 
+**Code bevor**  
+```python
 def calculate():
     try:
         radius = float(request.form['radius'])
         area = round(3.14159 * radius ** 2, 2)
+```
 
-        
+**Code danach** 
 ### 5. Debug-Modus deaktiviert
 
 - **Änderung**: Der Debug-Modus ist auf `False` gesetzt.
