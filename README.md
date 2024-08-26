@@ -5,6 +5,9 @@
 Nachdem wir die Entwicklungsphase unserer Flask-Anwendung abgeschlossen haben, müssen wir die Anwendung nun für den Einsatz in der Produktion vorbereiten. Dafür sind mehrere Anpassungen erforderlich. Wichtige Überlegungspunkte sind:
 
 - **Debugging-Funktionen deaktivieren**: Zunächst sollten Debugging-Funktionen deaktiviert werden, um die Sicherheit und Performance zu verbessern.
+                                          Das Deaktivieren des Debugging-Modus in der Produktion ist wichtig, um Sicherheitsrisiken zu vermeiden, da Debugging- 
+                                          Informationen sensible Daten preisgeben können, und um die Performance der Anwendung zu verbessern. Außerdem sorgt es 
+                                          für eine stabile Anwendung und eine bessere Benutzererfahrung, indem detaillierte Fehlermeldungen verborgen werden.
 
 - **Produktionsreife Datenbank**: Die Anwendung sollte auf eine produktionsreife Datenbank umgestellt werden, die für hohe Lasten ausgelegt ist.
 
