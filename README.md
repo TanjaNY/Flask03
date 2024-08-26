@@ -136,6 +136,25 @@ Die zweite Version entfernt die Datenbankverbindung und Tabellenerstellung aus d
 **Warum die Änderung?**
 Dies stellt sicher, dass die Tabellenerstellung unabhängig von der Art der Ausführung der Anwendung erfolgt und verbessert die Struktur des Codes.
 
+**Ursprüngliche Code:**
+
+```python
+if __name__ == '__main__':
+    # Stellt eine Verbindung zur Datenbank her
+    conn = get_db_connection()
+
+    # Erstellt die Tabelle nur, wenn sie nicht vorhanden ist
+    create_table()
+
+    # Schließt die Verbindung nach dem Erstellen der Tabelle
+    conn.close()
+
+    # Startet die Flask-Anwendung
+   
+    app.run(host='0.0.0.0', port=5005, debug=True)
+```
+
+
 **Code:**
 
 ```python
