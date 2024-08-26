@@ -2,37 +2,26 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import datetime
 import os
+from math import pi
 import logging
 from logging.handlers import RotatingFileHandler
-from logging.config import fileConfig
-
+from werkzeug.exceptions import BadRequest, InternalServerError
 
 app = Flask(__name__)
-# Create a file handler
-file_handler = RotatingFileHandler('flask.log', maxBytes=1024 * 1024 * 10, backupCount=10)
-
-# Create a logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-# Create a formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# Add the formatter to the file handler
-file_handler.setFormatter(formatter)
-
-# Add the file handler to the logger
-logger.addHandler(file_handler)
-
-# Configure logging
-fileConfig('logging.conf')
-logger = logging.getLogger()
-
-
 
 # Konfiguration der Datenbankverbindung
 BASE_DIR = os.getcwd()
-db_path = os.path.join(BASE_DIR, "circle_calculations.db")
+DB_PATH = os.path.join(BASE_DIR, "circle_calculations.db")
+
+# Logging-Konfiguration
+file_handler = RotatingFileHandler('flask.log', maxBytes=1024 * 1024 * 10, backupCount=10)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+
+# Logger-Konfiguration
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
 
 
 def get_db_connection():
@@ -41,80 +30,82 @@ def get_db_connection():
     Rückgabe:
         Ein sqlite3.Connection-Objekt, das die Verbindung zur Datenbank darstellt.
     """
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row  # Ermöglicht den Zugriff auf Daten nach Spaltennamen
-    return conn
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row  # Ermöglicht den Zugriff auf Daten nach Spaltennamen
+        return conn
+    except sqlite3.Error as e:
+        app.logger.error(f"Database connection error: {e}")
+        raise InternalServerError("Datenbankverbindungsfehler")
 
-def create_table():
+
+def init_db():
     """
-    Erstellt die Tabelle 'calculations' in der SQLite-Datenbank, wenn sie noch nicht vorhanden ist.
+    Initialisiert die Datenbank und erstellt die Tabelle 'calculations', wenn sie noch nicht vorhanden ist.
     """
-    conn = get_db_connection()
-    conn.execute('''CREATE TABLE IF NOT EXISTS calculations (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        radius REAL NOT NULL,
-        area REAL NOT NULL,
-        timestamp DATETIME NOT NULL
-    )''')
-    conn.commit()
-    conn.close()
+    try:
+        with get_db_connection() as conn:
+            conn.execute('''CREATE TABLE IF NOT EXISTS calculations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                radius REAL NOT NULL,
+                area REAL NOT NULL,
+                timestamp DATETIME NOT NULL
+            )''')
+    except sqlite3.Error as e:
+        app.logger.error(f"Database table creation error: {e}")
+        raise InternalServerError("Fehler beim Erstellen der Datenbanktabelle")
 
 
+def calculate_area(radius):
+    """
+    Berechnet die Fläche eines Kreises anhand des übergebenen Radius.
+    """
+    return round(pi * radius ** 2, 2)
 
 
 @app.route('/')
 def index():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM calculations ORDER BY timestamp DESC')
-    results = cursor.fetchall()
-    conn.close()
-    return render_template('index.html', results=results)
+    try:
+        with get_db_connection() as conn:
+            results = conn.execute('SELECT * FROM calculations ORDER BY timestamp DESC').fetchall()
+        return render_template('index.html', results=results)
+    except sqlite3.Error as e:
+        app.logger.error(f"Database query error: {e}")
+        return render_template('index.html', error="Fehler beim Abrufen der Daten")
 
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
     try:
         radius = float(request.form['radius'])
-        area = round(3.14159 * radius ** 2, 2)
+        area = calculate_area(radius)
 
-        # Speichert das Berechnungsergebnis und den Zeitstempel in der Datenbank
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO calculations (radius, area, timestamp) VALUES (?, ?, ?)',
-                       (radius, area, datetime.datetime.now()))
-        conn.commit()
-        conn.close()
+        with get_db_connection() as conn:
+            conn.execute('INSERT INTO calculations (radius, area, timestamp) VALUES (?, ?, ?)',
+                         (radius, area, datetime.datetime.now()))
 
         return render_template('index.html', radius=radius, result=area, success=True)
     except ValueError:
         return render_template('index.html', result=None, error="Ungültige Eingabe")
+    except sqlite3.Error as e:
+        app.logger.error(f"Database insertion error: {e}")
+        return render_template('index.html', error="Fehler beim Speichern der Daten")
 
 
-@app.route('/delete/<int:calculation_id>', methods=['GET', 'POST'])
+@app.route('/delete/<int:calculation_id>', methods=['POST'])
 def delete(calculation_id):
-    if request.method == 'POST':
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute('DELETE FROM calculations WHERE id = ?', (calculation_id,))
-        conn.commit()
-        conn.close()
+    try:
+        with get_db_connection() as conn:
+            conn.execute('DELETE FROM calculations WHERE id = ?', (calculation_id,))
         return redirect(url_for('index'))
-    else:
-        # Anzeige der Bestätigungsseite vor der Löschung (optional)
-        return render_template('delete.html', calculation_id=calculation_id)
+    except sqlite3.Error as e:
+        app.logger.error(f"Database deletion error: {e}")
+        return render_template('index.html', error="Fehler beim Löschen der Daten")
 
 
 if __name__ == '__main__':
-    # Stellt eine Verbindung zur Datenbank her
-    conn = get_db_connection()
-
-    # Erstellt die Tabelle nur, wenn sie nicht vorhanden ist
-    create_table()
-
-    # Schließt die Verbindung nach dem Erstellen der Tabelle
-    conn.close()
+    # Initialisiert die Datenbank und stellt sicher, dass die Tabelle existiert
+    init_db()
 
     # Startet die Flask-Anwendung
-   
-    app.run(host='0.0.0.0', port=5005, debug=True)
+    app.run(host='0.0.0.0', port=5005, debug=False)
