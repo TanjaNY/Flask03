@@ -78,7 +78,7 @@ def init_db():
     except sqlite3.Error as e:
         app.logger.error(f"Database table creation error: {e}")
         raise InternalServerError("Fehler beim Erstellen der Datenbanktabelle")
-
+```
 
 ### 2. Fehlerbehandlung und Logging
 
