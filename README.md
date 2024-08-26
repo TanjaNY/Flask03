@@ -99,6 +99,16 @@ def calculate():
 ```
 
 **Code danach** 
+
+```python
+from math import pi
+def calculate_area(radius):
+    """
+    Berechnet die Fläche eines Kreises anhand des übergebenen Radius.
+    """
+    return round(pi * radius ** 2, 2)
+
+```
 ### 5. Debug-Modus deaktiviert
 
 - **Änderung**: Der Debug-Modus ist auf `False` gesetzt.
