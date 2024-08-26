@@ -1,6 +1,18 @@
 # Von Entwicklung zu Produktion
 
+Um eine Entwicklungsanwendung in die Produktion zu überführen, müssen wir mehrere Anpassungen vornehmen. Wichtige Überlegungspunkte sind:
 
+Zunächst sollten Debugging-Funktionen deaktiviert werden, um die Sicherheit und Performance zu verbessern.
+
+Die Anwendung sollte auf eine produktionsreife Datenbank umgestellt werden, die für hohe Lasten ausgelegt ist.
+
+Zudem müssen Sicherheitsmaßnahmen wie HTTPS, Firewalls und Zugriffskontrollen implementiert werden.
+
+Schließlich sollten Skalierbarkeit und Überwachungstools berücksichtigt werden, um eine stabile und zuverlässige Laufzeitumgebung zu gewährleisten.
+
+Ein Webserver ist notwendig, um die Anwendung effizient und sicher in der Produktion bereitzustellen, Anfragen zu verwalten und Lastverteilung zu ermöglichen.
+
+Logs sind entscheidend, um Fehler zu diagnostizieren und die Performance sowie die Sicherheit der Anwendung kontinuierlich zu überwachen.
 ### 1. Code Refactoring
 
 **Warum brauchen wir Code Refactoring?**
