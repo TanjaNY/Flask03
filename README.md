@@ -1,18 +1,19 @@
-# Von Entwicklung zu Produktion
+# Deployment- Von Entwicklung zu Produktion
 
-Um eine Entwicklungsanwendung in die Produktion zu überführen, müssen wir mehrere Anpassungen vornehmen. Wichtige Überlegungspunkte sind:
+## Überführung einer Entwicklungsanwendung in die Produktion
 
-Zunächst sollten Debugging-Funktionen deaktiviert werden, um die Sicherheit und Performance zu verbessern.
+Nachdem wir die Entwicklungsphase unserer Flask-Anwendung abgeschlossen haben, müssen wir die Anwendung nun für den Einsatz in der Produktion vorbereiten. Dafür sind mehrere Anpassungen erforderlich. Wichtige Überlegungspunkte sind:
 
-Die Anwendung sollte auf eine produktionsreife Datenbank umgestellt werden, die für hohe Lasten ausgelegt ist.
+- **Debugging-Funktionen deaktivieren**: Zunächst sollten Debugging-Funktionen deaktiviert werden, um die Sicherheit und Performance zu verbessern.
 
-Zudem müssen Sicherheitsmaßnahmen wie HTTPS, Firewalls und Zugriffskontrollen implementiert werden.
+- **Produktionsreife Datenbank**: Die Anwendung sollte auf eine produktionsreife Datenbank umgestellt werden, die für hohe Lasten ausgelegt ist.
 
-Schließlich sollten Skalierbarkeit und Überwachungstools berücksichtigt werden, um eine stabile und zuverlässige Laufzeitumgebung zu gewährleisten.
+- **Sicherheitsmaßnahmen implementieren**: Zudem müssen Sicherheitsmaßnahmen wie HTTPS, Firewalls und Zugriffskontrollen implementiert werden.
 
-Ein Webserver ist notwendig, um die Anwendung effizient und sicher in der Produktion bereitzustellen, Anfragen zu verwalten und Lastverteilung zu ermöglichen.
+- **Skalierbarkeit und Überwachung**: Schließlich sollten Skalierbarkeit und Überwachungstools berücksichtigt werden, um eine stabile und zuverlässige Laufzeitumgebung zu gewährleisten.
 
-Logs sind entscheidend, um Fehler zu diagnostizieren und die Performance sowie die Sicherheit der Anwendung kontinuierlich zu überwachen.
+- **Webserver einrichten**: Ein Webserver ist notwendig, um die Anwendung effizient und sicher in der Produktion bereitzustellen, Anfragen zu verwalten
+
 ### 1. Code Refactoring
 
 **Warum brauchen wir Code Refactoring?**
