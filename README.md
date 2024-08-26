@@ -109,10 +109,43 @@ def calculate_area(radius):
     return round(pi * radius ** 2, 2)
 
 ```
+**Was ist passiert?**
+**Eine separate Funktion wurde erstellt:**
+Die Berechnung wurde in eine eigenständige Funktion namens calculate_area ausgelagert. Dies verbessert die Modularität und Wiederverwendbarkeit des Codes.
+
+**Verwendung des math-Moduls:*
+Statt den ungenauen Wert 3.14159 für Pi zu verwenden, wird nun die Konstante pi aus dem math-Modul importiert. Dies erhöht die Genauigkeit der Berechnung.
+
+**Parameterübergabe:**
+Die neue Funktion nimmt den radius als Parameter entgegen, anstatt ihn aus request.form zu extrahieren. Dies macht die Funktion unabhängiger von der Flask-Umgebung und somit flexibler einsetzbar.
+
+**Entfernung der Typumwandlung:**
+Die explizite Umwandlung zu float() wurde entfernt. Dies verlagert die Verantwortung für die korrekte Typübergabe auf den Aufrufer der Funktion.
+
+**Hinzufügen eines Docstrings:**
+Die neue Funktion enthält einen Docstring, der ihre Funktionalität beschreibt. Dies verbessert die Lesbarkeit und Dokumentation des Codes.
+
+**Entfernung des try-Blocks:**
+
+
+Der try-Block wurde entfernt. Die Fehlerbehandlung wird nun außerhalb dieser Funktion durchgeführt, was eine klarere Trennung von Berechnung und Fehlerbehandlung ermöglicht.
+
+
 ### 5. Debug-Modus deaktiviert
 
 - **Änderung**: Der Debug-Modus ist auf `False` gesetzt.
 - **Erklärung**: In einer Produktionsumgebung sollte der Debug-Modus deaktiviert sein, um potenzielle Sicherheitslücken zu vermeiden und keine sensiblen Informationen preiszugeben.
+- 
+**Code bevor**
+```python
+app.run(host='0.0.0.0', port=5005, debug=True)
+```
+
+**Code danach**
+```python
+app.run(host='0.0.0.0', port=5005, debug=True)
+```
+
 
 ## Fazit
 
