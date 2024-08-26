@@ -27,12 +27,6 @@ Code-Refactoring ist aus mehreren Gründen wichtig:
 Code-Refactoring vor der Produktions-Deployment ist wichtig, um sicherzustellen, dass der Code robust und fehlerfrei ist. Es hilft, potenzielle Performance-Probleme und Sicherheitslücken zu identifizieren und zu beheben, bevor sie in einer Live-Umgebung Schaden anrichten können. Durch Refactoring wird der Code sauberer und einfacher zu verstehen, was die Wartung und das Debugging nach der Bereitstellung erleichtert. Zudem stellt es sicher, dass der Code effizient und skalierbar ist, was in einer Produktionsumgebung von entscheidender Bedeutung ist.
 
 
-# Code-Optimierung und Erläuterungen
-
-## Übersicht
-
-Dieser Code kombiniert die besten Ansätze aus zwei vorhandenen Implementierungen, um eine robuste und effiziente Anwendung für die Produktion zu gewährleisten. Die folgenden Änderungen und Verbesserungen wurden vorgenommen:
-
 ### 1. Kontextmanager für Datenbankoperationen (`with`-Statements)
 
 - **Änderung**: Alle Datenbankoperationen verwenden nun `with`-Statements.
