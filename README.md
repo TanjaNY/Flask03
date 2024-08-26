@@ -20,7 +20,8 @@ Nachdem wir die Entwicklungsphase unserer Flask-Anwendung abgeschlossen haben, m
 ### 1. Code Refactoring
 
 **Warum brauchen wir Code Refactoring?**
-Code-Refactoring ist aus mehreren Gründen wichtig:
+
+Code-Refactoring ist ein wichtiger Schritt im Softwareentwicklungsprozess, der dazu beiträgt, die Codequalität zu verbessern und die Bereitstellung zu erleichtern. Durch Refactoring wird der Code lesbarer, wartbarer und weniger fehleranfällig, was die Zusammenarbeit im Team und die langfristige Pflege der Software vereinfacht.Die Gründen, warum das Refactoring wichtig ist:
 
 1. Verbesserte Lesbarkeit: Macht den Code verständlicher für Entwickler.
 
@@ -43,26 +44,59 @@ Code-Refactoring ist aus mehreren Gründen wichtig:
 Code-Refactoring vor der Produktions-Deployment ist wichtig, um sicherzustellen, dass der Code robust und fehlerfrei ist. Es hilft, potenzielle Performance-Probleme und Sicherheitslücken zu identifizieren und zu beheben, bevor sie in einer Live-Umgebung Schaden anrichten können. Durch Refactoring wird der Code sauberer und einfacher zu verstehen, was die Wartung und das Debugging nach der Bereitstellung erleichtert. Zudem stellt es sicher, dass der Code effizient und skalierbar ist, was in einer Produktionsumgebung von entscheidender Bedeutung ist.
 
 
-### 1. Kontextmanager für Datenbankoperationen (`with`-Statements)
+### 1. Datenbankinitialisierung mit dem Kontextmanager für Datenbankoperationen (`with`-Statements)
 
-- **Änderung**: Alle Datenbankoperationen verwenden nun `with`-Statements.
+
+- - **Änderung**: Die Datenbankinitialisierung wird in der Funktion `init_db()` ausgeführt, die in einem Kontextmanager ausgeführt wird.Ein Kontextmanager in Python ist ein Objekt, das den Kontext für die Ausführung eines Codeblocks definiert. Es wird typischerweise mit dem with-Statement verwendet.
+- **Erklärung**: Dies stellt sicher, dass die Datenbanktabelle nur einmal beim Start der Anwendung erstellt wird, falls sie noch nicht existiert. Dadurch wird die Initialisierung sauberer und robuster.
+
+- - **Änderung**: Alle Datenbankoperationen verwenden nun `with`-Statements.
 - **Erklärung**: Der Einsatz von `with`-Statements stellt sicher, dass die Datenbankverbindung automatisch geschlossen wird, auch wenn ein Fehler auftritt. Dies macht den Code sicherer und kompakter, indem es die Notwendigkeit eines `finally`-Blocks eliminiert.
+
+**Code bevor** 
+
+Eine neuer Funktion wird erstellt.
+
+ **Code danach** 
+
+ def init_db():
+    """
+    Initialisiert die Datenbank und erstellt die Tabelle 'calculations', 
+    wenn sie noch nicht vorhanden ist.
+    """
+    try:
+        with get_db_connection() as conn:
+            conn.execute('''
+                CREATE TABLE IF NOT EXISTS calculations (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    radius REAL NOT NULL,
+                    area REAL NOT NULL,
+                    timestamp DATETIME NOT NULL
+                )
+            ''')
+    except sqlite3.Error as e:
+        app.logger.error(f"Database table creation error: {e}")
+        raise InternalServerError("Fehler beim Erstellen der Datenbanktabelle")
+
+
+
 
 ### 2. Fehlerbehandlung und Logging
 
 - **Änderung**: Fehlerbehandlungsmechanismen (`try-except`) wurden in den Funktionen `get_db_connection()`, `init_db()`, `index()`, `calculate()` und `delete()` beibehalten, ergänzt durch das Logging mit `app.logger.error()`.
 - **Erklärung**: Die Fehlerbehandlung sorgt dafür, dass die Anwendung stabil bleibt, auch wenn unerwartete Fehler auftreten. Das Logging ermöglicht es, Fehler detailliert zu protokollieren, was besonders für die Fehlerbehebung in der Produktion wichtig ist.
 
-### 3. Nutzung von `math.pi`
+### 2. Nutzung von `math.pi`
 
 - **Änderung**: Die Berechnung der Kreisfläche verwendet nun die Konstante `pi` aus dem `math`-Modul.
 - **Erklärung**: `math.pi` ist eine genauere und standardisierte Methode zur Berechnung des Pi-Wertes, was zu präziseren Berechnungen führt. Die Auslagerung der Berechnung in die Funktion `calculate_area()` erhöht die Modularität und Wiederverwendbarkeit des Codes.
 
-### 4. Datenbankinitialisierung
+def calculate():
+    try:
+        radius = float(request.form['radius'])
+        area = round(3.14159 * radius ** 2, 2)
 
-- **Änderung**: Die Datenbankinitialisierung wird in der Funktion `init_db()` ausgeführt, die in einem Kontextmanager ausgeführt wird.
-- **Erklärung**: Dies stellt sicher, dass die Datenbanktabelle nur einmal beim Start der Anwendung erstellt wird, falls sie noch nicht existiert. Dadurch wird die Initialisierung sauberer und robuster.
-
+        
 ### 5. Debug-Modus deaktiviert
 
 - **Änderung**: Der Debug-Modus ist auf `False` gesetzt.
