@@ -55,11 +55,12 @@ Code-Refactoring vor der Produktions-Deployment ist wichtig, um sicherzustellen,
 
 **Code bevor** 
 
-Eine neuer Funktion wird erstellt.
+Eine neue Funktion wird erstellt.
 
  **Code danach** 
 
- def init_db():
+ ```python
+def init_db():
     """
     Initialisiert die Datenbank und erstellt die Tabelle 'calculations', 
     wenn sie noch nicht vorhanden ist.
@@ -77,8 +78,6 @@ Eine neuer Funktion wird erstellt.
     except sqlite3.Error as e:
         app.logger.error(f"Database table creation error: {e}")
         raise InternalServerError("Fehler beim Erstellen der Datenbanktabelle")
-
-
 
 
 ### 2. Fehlerbehandlung und Logging
