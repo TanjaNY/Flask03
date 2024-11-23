@@ -82,10 +82,110 @@ def init_db():
 
 ### 2. Fehlerbehandlung und Logging
 
-- **Änderung**: Fehlerbehandlungsmechanismen (`try-except`) wurden in den Funktionen `get_db_connection()`, `init_db()`, `index()`, `calculate()` und `delete()` beibehalten, ergänzt durch das Logging mit `app.logger.error()`.
-- **Erklärung**: Die Fehlerbehandlung sorgt dafür, dass die Anwendung stabil bleibt, auch wenn unerwartete Fehler auftreten. Das Logging ermöglicht es, Fehler detailliert zu protokollieren, was besonders für die Fehlerbehebung in der Produktion wichtig ist.
+**Why Logging is Essential in Production Applications**
 
-### 2. Nutzung von `math.pi`
+# Warum Logging in Produktionsanwendungen unerlässlich ist
+
+## 2.1.1 Problemerkennung und Fehlerbehebung
+- Die alte Version hatte kein Logging, was folgende Schwierigkeiten verursachte:
+  - Fehlerursachen und -zeitpunkte waren schwer zu identifizieren
+  - Der Anwendungsablauf konnte nicht nachverfolgt werden
+  - Fehlerbehebung in der Produktion war erschwert
+- Die neue Version implementiert umfassendes Logging für:
+  - Datenbankverbindungsfehler
+  - Probleme bei der Anfrageausführung
+  - Eingabevalidierungsfehler
+  - Änderungen des Anwendungszustands
+
+## 2.2 Wichtige Verbesserungen in der neuen Version
+### 2.2.1. Logging-Konfiguration
+```python
+# Hinzufügen der Logging-Konfiguration
+file_handler = RotatingFileHandler('flask.log', maxBytes=1024 * 1024 * 10, backupCount=10)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
+```
+
+### 2.2.2 Fehlerbehandlung und Logging
+```python
+# Alte Version - ohne Fehler-Logging
+def get_db_connection():
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+# Neue Version - mit Fehler-Logging
+def get_db_connection():
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        return conn
+    except sqlite3.Error as e:
+        app.logger.error(f"Database connection error: {e}")
+        raise InternalServerError("Datenbankverbindungsfehler")
+```
+
+## 2.3 Vorteile des neuen Logging-Systems
+
+### 2.3.1 Log-Rotation
+- Verwendet `RotatingFileHandler` zur Verwaltung der Protokolldateigröße
+- Erstellt automatisch neue Protokolldateien bei Erreichen der Größenbeschränkung
+- Behält 10 Sicherungsdateien bei (backupCount=10)
+- Verhindert Speicherplatzprobleme durch unbegrenztes Logwachstum
+
+### 2.3.2 Strukturiertes Log-Format
+- Zeitstempel: Zeitpunkt des Ereignisses
+- Name: Logger-Name (Modul/Komponente)
+- Level: Schweregrad des Logs (DEBUG, INFO, ERROR, etc.)
+- Nachricht: Detaillierte Beschreibung des Ereignisses
+
+### 2.3.3 Fehlernachverfolgung
+- Datenbankfehler werden nun protokolliert mit:
+  - Verbindungsfehlern
+  - Fehler bei der Anfrageausführung
+  - Probleme bei der Tabellenerstellung
+  - Fehler bei der Dateneinfügung
+
+## 2.4. Logging-Konfigurationsdatei (logging.conf)
+```ini
+[loggers]
+keys=root
+
+[handlers]
+keys=fileHandler
+
+[formatters]
+keys=simpleFormatter
+
+[logger_root]
+level=DEBUG
+handlers=fileHandler
+
+[handler_fileHandler]
+class=FileHandler
+level=DEBUG
+formatter=simpleFormatter
+args=('flask.log', 'a')
+
+[formatter_simpleFormatter]
+format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+```
+
+## 2.5 Sicherheitsverbesserungen
+- Debug-Modus in der Produktion deaktiviert (debug=False)
+- Verbesserte Fehlerbehandlung verhindert die Offenlegung sensibler Informationen
+- Logs können potenzielle Sicherheitsprobleme oder Angriffe identifizieren
+
+## 2.6 Wartbarkeitsverbesserungen
+- Separate Logging-Konfigurationsdatei
+- Einheitliche Fehlerbehandlungsmuster
+- Klare Trennung der Zuständigkeiten
+- Verbesserte Codeorganisation
+
+### 3. Nutzung von `math.pi`
 
 - **Änderung**: Die Berechnung der Kreisfläche verwendet nun die Konstante `pi` aus dem `math`-Modul.
 - **Erklärung**: `math.pi` ist eine genauere und standardisierte Methode zur Berechnung des Pi-Wertes, was zu präziseren Berechnungen führt. Die Auslagerung der Berechnung in die Funktion `calculate_area()` erhöht die Modularität und Wiederverwendbarkeit des Codes.
@@ -131,7 +231,7 @@ Die neue Funktion enthält einen Docstring, der ihre Funktionalität beschreibt.
 Der try-Block wurde entfernt. Die Fehlerbehandlung wird nun außerhalb dieser Funktion durchgeführt, was eine klarere Trennung von Berechnung und Fehlerbehandlung ermöglicht.
 
 
-### 5. Debug-Modus deaktiviert
+### 4. Debug-Modus deaktiviert
 
 - **Änderung**: Der Debug-Modus ist auf `False` gesetzt.
 - **Erklärung**: In einer Produktionsumgebung sollte der Debug-Modus deaktiviert sein, um potenzielle Sicherheitslücken zu vermeiden und keine sensiblen Informationen preiszugeben.
