@@ -44,7 +44,7 @@ Code-Refactoring ist ein wichtiger Schritt im Softwareentwicklungsprozess, der d
 Code-Refactoring vor der Produktions-Deployment ist wichtig, um sicherzustellen, dass der Code robust und fehlerfrei ist. Es hilft, potenzielle Performance-Probleme und Sicherheitslücken zu identifizieren und zu beheben, bevor sie in einer Live-Umgebung Schaden anrichten können. Durch Refactoring wird der Code sauberer und einfacher zu verstehen, was die Wartung und das Debugging nach der Bereitstellung erleichtert. Zudem stellt es sicher, dass der Code effizient und skalierbar ist, was in einer Produktionsumgebung von entscheidender Bedeutung ist.
 
 
-### 1. Datenbankinitialisierung mit dem Kontextmanager für Datenbankoperationen (`with`-Statements)
+### 2. Datenbankinitialisierung mit dem Kontextmanager für Datenbankoperationen (`with`-Statements)
 
 
 - - **Änderung**: Die Datenbankinitialisierung wird in der Funktion `init_db()` ausgeführt, die in einem Kontextmanager ausgeführt wird.Ein Kontextmanager in Python ist ein Objekt, das den Kontext für die Ausführung eines Codeblocks definiert. Es wird typischerweise mit dem with-Statement verwendet.
@@ -80,13 +80,13 @@ def init_db():
         raise InternalServerError("Fehler beim Erstellen der Datenbanktabelle")
 ```
 
-### 2. Fehlerbehandlung und Logging
+## 3. Fehlerbehandlung und Logging
 
 **Why Logging is Essential in Production Applications**
 
 # Warum Logging in Produktionsanwendungen unerlässlich ist
 
-## 2.1.1 Problemerkennung und Fehlerbehebung
+### 3.1.1 Problemerkennung und Fehlerbehebung
 - Die alte Version hatte kein Logging, was folgende Schwierigkeiten verursachte:
   - Fehlerursachen und -zeitpunkte waren schwer zu identifizieren
   - Der Anwendungsablauf konnte nicht nachverfolgt werden
@@ -97,8 +97,8 @@ def init_db():
   - Eingabevalidierungsfehler
   - Änderungen des Anwendungszustands
 
-## 2.2 Wichtige Verbesserungen in der neuen Version
-### 2.2.1. Logging-Konfiguration
+### 3.2 Wichtige Verbesserungen in der neuen Version
+#### 3.2.1. Logging-Konfiguration
 ```python
 # Hinzufügen der Logging-Konfiguration
 file_handler = RotatingFileHandler('flask.log', maxBytes=1024 * 1024 * 10, backupCount=10)
@@ -109,7 +109,7 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(file_handler)
 ```
 
-### 2.2.2 Fehlerbehandlung und Logging
+### 3.2.2 Fehlerbehandlung und Logging
 ```python
 # Alte Version - ohne Fehler-Logging
 def get_db_connection():
@@ -128,28 +128,28 @@ def get_db_connection():
         raise InternalServerError("Datenbankverbindungsfehler")
 ```
 
-## 2.3 Vorteile des neuen Logging-Systems
+## 3.3 Vorteile des neuen Logging-Systems
 
-### 2.3.1 Log-Rotation
+### 3.3.1 Log-Rotation
 - Verwendet `RotatingFileHandler` zur Verwaltung der Protokolldateigröße
 - Erstellt automatisch neue Protokolldateien bei Erreichen der Größenbeschränkung
 - Behält 10 Sicherungsdateien bei (backupCount=10)
 - Verhindert Speicherplatzprobleme durch unbegrenztes Logwachstum
 
-### 2.3.2 Strukturiertes Log-Format
+### 3.3.2 Strukturiertes Log-Format
 - Zeitstempel: Zeitpunkt des Ereignisses
 - Name: Logger-Name (Modul/Komponente)
 - Level: Schweregrad des Logs (DEBUG, INFO, ERROR, etc.)
 - Nachricht: Detaillierte Beschreibung des Ereignisses
 
-### 2.3.3 Fehlernachverfolgung
+### 3.3.3 Fehlernachverfolgung
 - Datenbankfehler werden nun protokolliert mit:
   - Verbindungsfehlern
   - Fehler bei der Anfrageausführung
   - Probleme bei der Tabellenerstellung
   - Fehler bei der Dateneinfügung
 
-## 2.4. Logging-Konfigurationsdatei (logging.conf)
+## 3.4. Logging-Konfigurationsdatei (logging.conf)
 ```ini
 [loggers]
 keys=root
@@ -174,18 +174,18 @@ args=('flask.log', 'a')
 format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
 ```
 
-## 2.5 Sicherheitsverbesserungen
+## 3.5 Sicherheitsverbesserungen
 - Debug-Modus in der Produktion deaktiviert (debug=False)
 - Verbesserte Fehlerbehandlung verhindert die Offenlegung sensibler Informationen
 - Logs können potenzielle Sicherheitsprobleme oder Angriffe identifizieren
 
-## 2.6 Wartbarkeitsverbesserungen
+## 3.6 Wartbarkeitsverbesserungen
 - Separate Logging-Konfigurationsdatei
 - Einheitliche Fehlerbehandlungsmuster
 - Klare Trennung der Zuständigkeiten
 - Verbesserte Codeorganisation
 
-### 3. Nutzung von `math.pi`
+### 4. Nutzung von `math.pi`
 
 - **Änderung**: Die Berechnung der Kreisfläche verwendet nun die Konstante `pi` aus dem `math`-Modul.
 - **Erklärung**: `math.pi` ist eine genauere und standardisierte Methode zur Berechnung des Pi-Wertes, was zu präziseren Berechnungen führt. Die Auslagerung der Berechnung in die Funktion `calculate_area()` erhöht die Modularität und Wiederverwendbarkeit des Codes.
@@ -231,7 +231,7 @@ Die neue Funktion enthält einen Docstring, der ihre Funktionalität beschreibt.
 Der try-Block wurde entfernt. Die Fehlerbehandlung wird nun außerhalb dieser Funktion durchgeführt, was eine klarere Trennung von Berechnung und Fehlerbehandlung ermöglicht.
 
 
-### 4. Debug-Modus deaktiviert
+### 5. Debug-Modus deaktiviert
 
 - **Änderung**: Der Debug-Modus ist auf `False` gesetzt.
 - **Erklärung**: In einer Produktionsumgebung sollte der Debug-Modus deaktiviert sein, um potenzielle Sicherheitslücken zu vermeiden und keine sensiblen Informationen preiszugeben.
